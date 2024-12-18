@@ -2,14 +2,12 @@ package com.mycompany.tarea02patrones;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GestorDisponibilidad implements IGestorDisponibilidad {
+class GestorDisponibilidad implements IGestorDisponibilidad {
     private static GestorDisponibilidad instancia;
-    private Map<String, String> habitaciones;
-    private Map<String, String> paseos;
+    private Map<String, String> recursos;
 
     private GestorDisponibilidad() {
-        habitaciones = new HashMap<>();
-        paseos = new HashMap<>();
+        recursos = new HashMap<>();
     }
 
     public static synchronized GestorDisponibilidad getInstancia() {
@@ -21,13 +19,13 @@ public class GestorDisponibilidad implements IGestorDisponibilidad {
 
     @Override
     public boolean verificarDisponibilidad(String recurso) {
-        return "disponible".equals(habitaciones.getOrDefault(recurso, "no disponible"));
+        return "disponible".equals(recursos.getOrDefault(recurso, "no disponible"));
     }
 
     @Override
     public boolean bloquearRecurso(String recurso) {
         if (verificarDisponibilidad(recurso)) {
-            habitaciones.put(recurso, "reservado");
+            recursos.put(recurso, "reservado");
             return true;
         }
         return false;
@@ -35,6 +33,6 @@ public class GestorDisponibilidad implements IGestorDisponibilidad {
 
     @Override
     public void liberarRecurso(String recurso) {
-        habitaciones.put(recurso, "disponible");
+        recursos.put(recurso, "disponible");
     }
 }

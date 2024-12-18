@@ -1,34 +1,30 @@
 package com.mycompany.tarea02patrones;
 
-public class Reserva {
-    private String idReserva;
-    private Usuario usuario;
-    private String detalles;
-    private String estado;
+class Reserva {
+    private GestorReservas gestorReservas;
+    private String cambio;
 
-    public Reserva(String idReserva, Usuario usuario, String detalles) {
-        this.idReserva = idReserva;
-        this.usuario = usuario;
-        this.detalles = detalles;
-        this.estado = "pendiente";
+    public Reserva() {
+        this.gestorReservas = new GestorReservas();
     }
 
-    public void confirmarReserva() {
-        GestorDisponibilidad gestor = GestorDisponibilidad.getInstancia();
-        if (gestor.bloquearRecurso(detalles)) {
-            estado = "confirmada";
-            Notificador.enviarNotificacion(usuario, "Reserva confirmada: " + detalles);
-        }
+    public void realizarReserva(String detallesReserva) {
+        System.out.println("Reserva realizada: " + detallesReserva);
+        this.cambio = detallesReserva;
+        gestorReservas.notify("ReservaConfirmada", detallesReserva);
     }
 
-    public void cancelarReserva() {
-        GestorDisponibilidad gestor = GestorDisponibilidad.getInstancia();
-        gestor.liberarRecurso(detalles);
-        estado = "cancelada";
-        Notificador.enviarNotificacion(usuario, "Reserva cancelada: " + detalles);
+    public void cancelarReserva(String detallesReserva) {
+        System.out.println("Reserva cancelada: " + detallesReserva);
+        this.cambio = detallesReserva;
+        gestorReservas.notify("ReservaCancelada", detallesReserva);
     }
 
-    public void actualizarEstado(String nuevoEstado) {
-        this.estado = nuevoEstado;
+    public GestorReservas getGestorReservas() {
+        return gestorReservas;
+    }
+
+    public String getCambio() {
+        return cambio;
     }
 }

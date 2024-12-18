@@ -1,5 +1,10 @@
 package com.mycompany.tarea02patrones;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+// Clase Usuario
 public class Usuario {
     private String idUsuario;
     private String nombre;
@@ -10,10 +15,10 @@ public class Usuario {
     }
 
     public void realizarReserva(Reserva reserva) {
-        reserva.confirmarReserva();
+        reserva.realizarReserva("Detalles de la reserva para " + nombre);
     }
 
     public void recibirNotificacion(String mensaje) {
-        System.out.println("Notificacion para " + nombre + ": " + mensaje);
+        System.out.println("Notificación para " + nombre + ": " + mensaje);
     }
 }
