@@ -3,19 +3,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 class GestorDisponibilidad implements IGestorDisponibilidad {
-    private static GestorDisponibilidad instancia;
     private Map<String, String> recursos;
 
     private GestorDisponibilidad() {
         recursos = new HashMap<>();
     }
 
-    public static synchronized GestorDisponibilidad getInstancia() {
-        if (instancia == null) {
-            instancia = new GestorDisponibilidad();
-        }
-        return instancia;
-    }
 
     @Override
     public boolean verificarDisponibilidad(String recurso) {

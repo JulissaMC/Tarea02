@@ -1,30 +1,37 @@
 package com.mycompany.tarea02patrones;
 
-class Reserva {
-    private GestorReservas gestorReservas;
-    private String cambio;
+public class Reserva extends ComponentePaquete {
+    private String detalles;
+    private double precio;
 
-    public Reserva() {
-        this.gestorReservas = new GestorReservas();
+    public Reserva(String detalles, double precio) {
+        this.detalles = detalles;
+        this.precio = precio;
     }
 
-    public void realizarReserva(String detallesReserva) {
-        System.out.println("Reserva realizada: " + detallesReserva);
-        this.cambio = detallesReserva;
-        gestorReservas.notify("ReservaConfirmada", detallesReserva);
+    public String getDetalles() {
+        return detalles;
     }
 
-    public void cancelarReserva(String detallesReserva) {
-        System.out.println("Reserva cancelada: " + detallesReserva);
-        this.cambio = detallesReserva;
-        gestorReservas.notify("ReservaCancelada", detallesReserva);
+    public void setDetalles(String detalles) {
+        this.detalles = detalles;
     }
 
-    public GestorReservas getGestorReservas() {
-        return gestorReservas;
+    public double getPrecio() {
+        return precio;
     }
 
-    public String getCambio() {
-        return cambio;
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    @Override
+    public double calcularPrecio() {
+        return precio;
+    }
+
+    @Override
+    public void mostrarDetalles() {
+        System.out.println("Reserva: "+detalles+" - Precio: $"+precio);
     }
 }
