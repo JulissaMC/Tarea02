@@ -29,3 +29,4 @@ class GestorDisponibilidad implements IGestorDisponibilidad {
         recursos.put(recurso, "disponible");
     }
 }
+
